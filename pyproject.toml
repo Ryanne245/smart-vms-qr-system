@@ -1,0 +1,23 @@
+[project]
+name = "smart-vms-qr-system"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Ryanne245",email = "odohchidalu125@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10, <4.0"
+dependencies = [
+    "djangorestframework (>=3.17.1,<4.0.0)",
+    "psycopg2 (>=2.9.12,<3.0.0)",
+    "pillow (>=12.2.0,<13.0.0)",
+    "python-decouple (>=3.8,<4.0)",
+    "drf-spectacular (>=0.29.0,<0.30.0)",
+    "django (>=5.2.7,<6.0.0)",
+    "djangorestframework-simplejwt (>=5.5.1,<6.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
