@@ -30,6 +30,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         related_name="users"
     )
+    department = models.CharField(max_length=100, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
