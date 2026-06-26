@@ -31,6 +31,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         related_name="users"
     )
     department = models.CharField(max_length=100, blank=True)
+    otp = models.CharField(max_length=6, blank=True)
+    otp_created_at = models.DateTimeField(null=True, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
