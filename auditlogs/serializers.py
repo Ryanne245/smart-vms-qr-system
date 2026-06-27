@@ -55,3 +55,4 @@ class AuditLogFilterSerializer(serializers.Serializer):
     target_id = serializers.CharField(required=False)
     from_date = serializers.DateTimeField(required=False)
     to_date = serializers.DateTimeField(required=False)
+    actor_email = serializers.EmailField(required=False)

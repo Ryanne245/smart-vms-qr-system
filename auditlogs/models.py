@@ -19,6 +19,7 @@ class AuditLog(models.Model):
         VISIT_CHECKED_IN = "VISIT_CHECKED_IN", "Visit Checked In"
         VISIT_CHECKED_OUT = "VISIT_CHECKED_OUT", "Visit Checked Out"
         VISIT_OVERSTAY_FLAGGED = "VISIT_OVERSTAY_FLAGGED", "Visit Overstay Flagged"
+        NOTES_ADDED = "NOTES_ADDED", "Notes Added"
 
         # Visitor actions
         VISITOR_CREATED = "VISITOR_CREATED", "Visitor Created"

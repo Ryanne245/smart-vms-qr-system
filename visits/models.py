@@ -61,6 +61,7 @@ class Visit(models.Model):
     )
 
     purpose = models.TextField(blank=True)
+    notes = models.TextField(blank=True)
 
     # QR fields
     qr_code_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)

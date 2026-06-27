@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'visits',
     'notifications',
     'auditlogs',
+    'dashboard',
 
     #custom apps
     'rest_framework',

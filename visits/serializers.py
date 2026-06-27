@@ -24,6 +24,7 @@ class VisitSerializer(serializers.ModelSerializer):
             'organisation',
             'status',
             'purpose',
+            'notes',
             'qr_code_image',
             'qr_generated_at',
             'qr_expires_at',
