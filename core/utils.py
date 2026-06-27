@@ -4,6 +4,7 @@ from io import BytesIO
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.conf import settings
+from visits.models import Visit
 
 
 def get_client_ip(request):
@@ -103,7 +104,7 @@ def generate_qr_code(visit):
 def handle_host_approval_requirement(visit):
     """Auto approve visit if org doesn't require host approval"""
     if not visit.organisation.settings.require_host_approval:
-        visit.status = visit.class.Status.APPROVED
+        visit.status = Visit.Status.APPROVED
         visit.host_responded_at = timezone.now()
         visit.save(update_fields=['status', 'host_responded_at', 'updated_at'])
         generate_qr_code(visit)

@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import request, status
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Organisation, OrganisationSettings
@@ -71,10 +71,11 @@ class OrganisationDetailView(APIView):
         try:
             if request.user.role == "SUPER_ADMIN":
                 return Organisation.objects.get(id=org_id)
-            return Organisation.objects.get(
-                id=org_id,
-                id=request.user.organisation.id
-            )
+            else:
+                organisation = Organisation.objects.get(id=org_id)
+            if organisation.id != request.user.organisation.id:
+                return None
+            return organisation
         except Organisation.DoesNotExist:
             return None
 
@@ -151,10 +152,9 @@ class OrganisationSettingsView(APIView):
             if request.user.role == "SUPER_ADMIN":
                 organisation = Organisation.objects.get(id=org_id)
             else:
-                organisation = Organisation.objects.get(
-                    id=org_id,
-                    id=request.user.organisation.id
-                )
+                organisation = Organisation.objects.get(id=org_id)
+            if organisation.id != request.user.organisation.id:
+                return None
             return organisation.settings
         except (Organisation.DoesNotExist, OrganisationSettings.DoesNotExist):
             return None
@@ -199,15 +199,17 @@ class OrganisationLockdownView(APIView):
 
     def post(self, request, org_id):
         try:
-            organisation = Organisation.objects.get(
-                id=org_id,
-                id=request.user.organisation.id
-            )
-        except Organisation.DoesNotExist:
-            return Response(
+            organisation = Organisation.objects.get(id=org_id)
+            if organisation.id != request.user.organisation.id:
+                return Response(
                 {"detail": "Organisation not found."},
                 status=status.HTTP_404_NOT_FOUND
             )
+        except Organisation.DoesNotExist:
+            return Response(
+            {"detail": "Organisation not found."},
+            status=status.HTTP_404_NOT_FOUND
+        )
 
         settings = organisation.settings
         # Toggle lockdown

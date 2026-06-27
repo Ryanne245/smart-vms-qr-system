@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
+from drf_spectacular.utils import extend_schema
 
 from django.contrib.auth import get_user_model
 
@@ -26,7 +27,7 @@ from core.utils import create_audit_log, send_email_notification
 
 User = get_user_model()
 
-
+@extend_schema(request=LoginSerializer, responses={200:UserSerializer})
 class LoginView(APIView):
     permission_classes = [AllowAny]
 
@@ -52,6 +53,7 @@ class LoginView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(request=None, responses={200: None})
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
